@@ -21,11 +21,11 @@ namespace taxrun_API_new
         {
             Configuration = configuration;
 
-            var configurationBuilder = new ConfigurationBuilder()
-                .SetBasePath(WebHostingEnvironment.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+           // var configurationBuilder = new ConfigurationBuilder()
+               // .SetBasePath(WebHostingEnvironment.ContentRootPath)
+               // .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-            Configuration = configurationBuilder.Build();
+            //Configuration = configurationBuilder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -35,10 +35,18 @@ namespace taxrun_API_new
         {
             services.AddControllers();
             services.AddDbContext<MandateUserContext>(option=>option.UseSqlServer(Configuration.GetConnectionString("MandateUserConnection")));
+            services.AddMvc().AddXmlSerializerFormatters();
+
+            services.AddHttpsRedirection(options =>
+            {
+                options.HttpsPort = 443;
+           });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MandateUserContext mandateUserContext)
+        //public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -48,7 +56,8 @@ namespace taxrun_API_new
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
-            mandateUserContext.Database.EnsureCreated();
+            mandateUserContext.Database.EnsureCreated(); //Only okay if you don't change table schema
+            //mandateUserContext.Database.Migrate(); //Only okay if you are going to make changes to the table schema
 
             app.UseEndpoints(endpoints =>
             {

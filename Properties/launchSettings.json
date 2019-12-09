@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/MandateUsers",
+      "launchUrl": "api/MandateUser",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "taxrun_API_new": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/MandateUsers",
+      "launchUrl": "api/MandateUser",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -29,7 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/MandateUsers",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/MandateUser",
       "environmentVariables": {
         "ASPNETCORE_URLS": "https://+:443;http://+:80",
         "ASPNETCORE_HTTPS_PORT": "44373"
