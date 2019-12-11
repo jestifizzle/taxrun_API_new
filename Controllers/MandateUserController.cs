@@ -22,6 +22,7 @@ namespace taxrun_API_new.Controllers
 
         // GET: api/MandateUser
         [HttpGet]
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Client)]
         public IActionResult Get(string sort)
         {
             IQueryable<MandateUser> mandateUser;
@@ -55,9 +56,10 @@ namespace taxrun_API_new.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        public IActionResult SearchMandateUser(int userGroupID)
+        public IActionResult SearchMandateUser(int? userGroupId)
         {
-            var mandateUser = _mandateUserContext.MandateUsers.Where(x => x.UserGroupID.Equals(userGroupID));
+            var currentUserGroupId = userGroupId ?? 1;
+            var mandateUser = _mandateUserContext.MandateUsers.Where(x => x.UserGroupID.Equals(currentUserGroupId));
             return Ok(mandateUser);
         }
 

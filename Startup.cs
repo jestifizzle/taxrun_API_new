@@ -36,6 +36,7 @@ namespace taxrun_API_new
             services.AddControllers();
             services.AddDbContext<MandateUserContext>(option=>option.UseSqlServer(Configuration.GetConnectionString("MandateUserConnection")));
             services.AddMvc().AddXmlSerializerFormatters();
+            services.AddResponseCaching();
 
             services.AddHttpsRedirection(options =>
             {
@@ -56,6 +57,7 @@ namespace taxrun_API_new
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseResponseCaching();
             mandateUserContext.Database.EnsureCreated(); //Only okay if you don't change table schema
             //mandateUserContext.Database.Migrate(); //Only okay if you are going to make changes to the table schema
 
